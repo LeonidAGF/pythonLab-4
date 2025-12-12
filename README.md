@@ -5,6 +5,9 @@
 
 <br>
 
+Вариант 1. «Библиотеĸа»
+
+<br>
 
 ## Структура проекта
 
@@ -13,9 +16,18 @@
     ├── lab                                                                     # Кодовая база лабораторной работ
     │   ├── src/                                                                # Исходный код
     │       ├── main.py                                                         # Главный исполняемый файл
+    │       ├── Book.py                                                         # Файл содержащий класс книги
+    │       ├── BookCollection.py                                               # Файл содержащий класс BookCollection
+    │       ├── BookDictCollection.py                                           # Файл содержащий классы BookDictCollection,IsbnBookDictCollection,AuthorBookDictCollection,YearBookDictCollection
+    │       ├── Library.py                                                      # Файл содержащий класс Library
+    │       ├── simulation.py                                                   # Файл содержащий функцию run_simulation
     │       ├── constants.py                                                    # константы
     │   ├── tests/                                                              # Unit тесты
-    │       ├── test_bubble_sort.py                                             # Тесты для bubble_sort
+    │       ├── test_book.py                                                    # Тесты для объекта Book
+    │       ├── test_book_collection.py                                         # Тесты для BookCollection
+    │       ├── test_book_dict_collection.py                                    # Тесты для IsbnBookDictCollection,AuthorBookDictCollection,YearBookDictCollection
+    │       ├── test_library.py                                                 # Тесты для Library
+    │       ├── test_simulation.py                                              # Тесты для run_simulation и функций генерирующих данные для книг
     │       ├── test_wrong_cases.py                                             # Ошибочный тесты
     │   ├── uv.lock                                                             # зависимости проекта
     │   ├── requirements.txt
@@ -44,9 +56,15 @@
 
 <h2>Что было необходимо сделать</h2>
 
-    Было необходимо ...
+    Было необходимо реализовать классы Book,BookCollection, пользовательсĸую словарную ĸоллеĸцию,Library и  псевдослучайную симуляцию
 
 <h2>Что было реализованно</h2>
 
-- `...` ....
-- `...` ....
+- `Book` с полями title, author, year, genre, isbn
+- `BookCollection` с методами добавления и удаления, поддерживает среды и получение элемента по индексу, а также __iter__, __len__
+- `BookDictCollection` Класс являющийся обёрткой над словарём
+- `IsbnBookDictCollection` Класс наследующий свойства BookDictCollection, но изменяющий метод __contains__
+- `AuthorBookDictCollection` Класс наследующий свойства BookDictCollection, но изменяющий конструктор, так чтобы стандартный слоарь сопоставлял ключу список
+- `YearBookDictCollection` Класс наследующий свойства BookDictCollection, но изменяющий конструктор, так чтобы стандартный слоарь сопоставлял ключу список, изменнный метод remove
+- `Library` класс библеотеки поддерживающей поиск и удаление книг по isbn, названию, году, автору, жанру, по всем полям Book, реализовано обновление книг
+- `run_simulation` функция симуляции с случайными событиями на поиск и удаление книг по isbn, названию, году, автору, жанру, по всем полям Book, обновление книг, попытка получения несуществующей книги, добавление книги, пожар (случайное количество книг уничтожается по случайным фильтрам)
