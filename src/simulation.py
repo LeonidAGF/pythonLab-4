@@ -3,39 +3,27 @@ from src.Library import Library
 import random
 
 
-def get_new_isbn(seed=None) -> int:
+def get_new_isbn() -> int:
     """
     функция для генерации isbn
     :return: новый isbn
     """
-    if seed is not None:
-        random.seed(seed)
-    else:
-        random.seed(None)
     return random.randint(10000000000, 99999999999)
 
 
-def get_new_year(seed=None):
+def get_new_year():
     """
     функция для генерации года
     :return: новый год
     """
-    if seed is not None:
-        random.seed(seed)
-    else:
-        random.seed(None)
     return random.randint(2000, 2025)
 
 
-def get_new_str(seed=None):
+def get_new_str():
     """
     функция для генерации какой-то строки
     :return: новую строку
     """
-    if seed is not None:
-        random.seed(seed)
-    else:
-        random.seed(None)
     title = ""
     len = random.randint(5, 25)
     for i in range(len):
@@ -63,10 +51,10 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> int:
         isbns: list[int] = []
 
         for i in range(5000):
-            title: str = get_new_str(seed)
-            genre: str = get_new_str(seed)
-            author: str = get_new_str(seed)
-            year: int = get_new_year(seed)
+            title: str = get_new_str()
+            genre: str = get_new_str()
+            author: str = get_new_str()
+            year: int = get_new_year()
             titles.append(title)
             genres.append(genre)
             authors.append(author)
@@ -77,7 +65,7 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> int:
             genre_book: str = genres[random.randint(0, len(genres) - 1)]
             author_book: str = authors[random.randint(0, len(authors) - 1)]
             year_book: int = years[random.randint(0, len(years) - 1)]
-            isbn_book: int = get_new_isbn(seed)
+            isbn_book: int = get_new_isbn()
             isbns.append(isbn_book)
 
             lib.add_book(Book(title_book, author_book, year_book, genre_book, isbn_book))
@@ -89,11 +77,11 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> int:
             match event_code:
                 case 1:
                     # add book
-                    book_title: str = get_new_str(seed)
-                    book_genre: str = get_new_str(seed)
-                    book_author: str = get_new_str(seed)
-                    book_year: int = get_new_year(seed)
-                    book_isbn: int = get_new_isbn(seed)
+                    book_title: str = get_new_str()
+                    book_genre: str = get_new_str()
+                    book_author: str = get_new_str()
+                    book_year: int = get_new_year()
+                    book_isbn: int = get_new_isbn()
                     titles.append(book_title)
                     genres.append(book_genre)
                     authors.append(book_author)
