@@ -1,22 +1,22 @@
 from collections import defaultdict
 
+from src.Book import Book
+
 
 class BookDictCollection:
     """
-    Базовый класс для индекса книг.
-    Определяет интерфейс для добавления, удаления и поиска книг.
+    Базовый класс для BookDict
     """
 
     def __init__(self):
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        конструктор
         """
         self.data = {}
 
     def remove(self, index, el) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        функция удаления элемента по некоторому ключу
         :return: Данная функция ничего не возвращает
         """
         if self.data.get(index) == el:
@@ -26,36 +26,36 @@ class BookDictCollection:
 
     def __getitem__(self, index):
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+          функция получения элемента по некоторому ключу
+          :return: найденный элемент
         """
         return self.data[index]
 
-    def __setitem__(self, index, book) -> None:
+    def __setitem__(self, index, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        дабавление нового элемента по ключу
         :return: Данная функция ничего не возвращает
         """
         self.data[index] = book
 
     def __iter__(self):
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+           получение коллекции для итерирования
+          :return: dict
         """
-        return iter(self.data.values())
+        return self.data.values()
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+          получение количества ключей
+          :return: количество ключей
         """
         return len(self.data)
 
-    def __contains__(self, book):
+    def __contains__(self, book:Book) -> bool:
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+          функция проверяющая содержание элемента в коллекции
+          :return: true если элемент содержится в коллекции и false иначе
         """
         for key in self.data:
             if self.data.get(key) == book:
@@ -65,13 +65,12 @@ class BookDictCollection:
 
 class IsbnBookDictCollection(BookDictCollection):
     """
-      Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-      :return: Данная функция ничего не возвращает
+      коллекция сортирующая книги по isbn
     """
-    def __contains__(self, isbn:int):
+    def __contains__(self, isbn) -> bool:
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+          функция проверяющая содержание isbn в коллекции
+          :return: true если элемент содержится в коллекции и false иначе
         """
         for key in self.data:
             if self.data.get(key).isbn == isbn:
@@ -81,39 +80,37 @@ class IsbnBookDictCollection(BookDictCollection):
 
 class AuthorBookDictCollection(BookDictCollection):
     """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        Коллекция сортирующая книги по именам авторов
     """
 
     def __init__(self):
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        конструктор
         """
         super().__init__()
         self.data = defaultdict(list)
 
     def remove(self, author: str, el) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        функция удаления элемента по некоторому ключу
         :return: Данная функция ничего не возвращает
         """
         if el in self.data[author]:
             self.data[author].remove(el)
-            if not self.data[author]:
+            if len(self.data[author])==0:
                 del self.data[author]
 
-    def __setitem__(self, index, book) -> None:
+    def __setitem__(self, index:str, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        дабавление нового элемента по ключу
         :return: Данная функция ничего не возвращает
         """
         self.data[index].append(book)
 
-    def __contains__(self, book):
+    def __contains__(self, book:Book) -> bool:
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+            функция проверяющая содержание элемента в коллекции
+            :return: true если элемент содержится в коллекции и false иначе
         """
         for key in self.data:
             if book in self.data.get(key):
@@ -135,27 +132,27 @@ class YearBookDictCollection(BookDictCollection):
         super().__init__()
         self.data = defaultdict(list)
 
-    def remove(self, year, book):
+    def remove(self, year, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        функция удаления элемента по некоторому ключу
         :return: Данная функция ничего не возвращает
         """
         if book in self.data[year]:
             self.data[year].remove(book)
-            if not self.data[year]:
+            if len(self.data[year])==0:
                 del self.data[year]
 
-    def __setitem__(self, index, book) -> None:
+    def __setitem__(self, index:int, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        дабавление нового элемента по ключу
         :return: Данная функция ничего не возвращает
         """
         self.data[index].append(book)
 
-    def __contains__(self, book):
+    def __contains__(self, book:Book) -> bool:
         """
-          Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-          :return: Данная функция ничего не возвращает
+          функция проверяющая содержание элемента в коллекции
+          :return: true если элемент содержится в коллекции и false иначе
         """
         for key in self.data:
             if book in self.data.get(key):

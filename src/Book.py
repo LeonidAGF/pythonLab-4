@@ -1,4 +1,7 @@
 class Book:
+    """
+    класс книги
+    """
     title:str = ""
     author:str = ""
     year:int = 0

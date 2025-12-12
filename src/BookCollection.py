@@ -3,45 +3,44 @@ from src.Book import Book
 
 class BookCollection:
     """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-    :return: Данная функция ничего не возвращает
+    коллекция книг
     """
 
     def __init__(self) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        конструктор BookCollection
         """
         self.list: list[Book] = []
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index):
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        получение книги по индексу или через срез
+        :return: найденная книга или срез
         """
-        #if index >= len(self.list) or index < 0:
-        #    raise ValueError
-        return self.list[index]
+        try:
+            return self.list[index]
+        except Exception:
+            raise ValueError
 
-    def add(self, book) -> None:
+    def add(self, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        функция добовления книги в конец спмска
         :return: Данная функция ничего не возвращает
         """
         self.list.append(book)
 
-    def __setitem__(self, index: int, book) -> None:
+    def __setitem__(self, index: int, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        функция устанавлявающая книгу в определённое место списка по index
         :return: Данная функция ничего не возвращает
         """
         if index >= len(self.list) or index < 0:
             raise ValueError
         self.list[index] = book
 
-    def remove(self, book) -> None:
+    def remove(self, book:Book) -> None:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+        Функция удаляющая из списка книгу
         :return: Данная функция ничего не возвращает
         """
         try:
@@ -51,18 +50,37 @@ class BookCollection:
 
     def __iter__(self):
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        функция позволяющая получить все элементы мвссива в цикле
+        :return: book
         """
         for el in self.list:
             yield el
 
+    """
+        def __iter__(self):
+            Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
+            :return: Данная функция ничего не возвращает
+
+            return self
+
+        def __next__(self):
+            self.index+=1
+            if self.index<= len(self.list):
+                return self.list[self.index]
+            return StopIteration
+
+    """
+
     def __len__(self) -> int:
         """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
+        функция для нахождения количества всех элементов
+        :return: количество всех элементов
         """
         return len(self.list)
 
-    def __contains__(self, book) -> bool:
+    def __contains__(self, book:Book) -> bool:
+        """
+            функция для роверки нахождения книги в колекуии
+            :return: true если книга в колекции, иначе false
+        """
         return book in self.list
