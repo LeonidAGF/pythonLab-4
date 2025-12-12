@@ -22,14 +22,14 @@ class BookCollection:
         except Exception:
             raise ValueError
 
-    def add(self, book:Book) -> None:
+    def add(self, book: Book) -> None:
         """
         функция добовления книги в конец спмска
         :return: Данная функция ничего не возвращает
         """
         self.list.append(book)
 
-    def __setitem__(self, index: int, book:Book) -> None:
+    def __setitem__(self, index: int, book: Book) -> None:
         """
         функция устанавлявающая книгу в определённое место списка по index
         :return: Данная функция ничего не возвращает
@@ -38,7 +38,7 @@ class BookCollection:
             raise ValueError
         self.list[index] = book
 
-    def remove(self, book:Book) -> None:
+    def remove(self, book: Book) -> None:
         """
         Функция удаляющая из списка книгу
         :return: Данная функция ничего не возвращает
@@ -56,21 +56,6 @@ class BookCollection:
         for el in self.list:
             yield el
 
-    """
-        def __iter__(self):
-            Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-            :return: Данная функция ничего не возвращает
-
-            return self
-
-        def __next__(self):
-            self.index+=1
-            if self.index<= len(self.list):
-                return self.list[self.index]
-            return StopIteration
-
-    """
-
     def __len__(self) -> int:
         """
         функция для нахождения количества всех элементов
@@ -78,7 +63,7 @@ class BookCollection:
         """
         return len(self.list)
 
-    def __contains__(self, book:Book) -> bool:
+    def __contains__(self, book: Book) -> bool:
         """
             функция для роверки нахождения книги в колекуии
             :return: true если книга в колекции, иначе false

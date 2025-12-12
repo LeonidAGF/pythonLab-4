@@ -186,13 +186,13 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> int:
                                 lib.update_book(el, new_book_update_genre)
                         else:
                             # search by isbn
-                                isbn_num_update: int = random.randint(0, len(isbns) - 1)
-                                old_book: Book = lib.get_book_by_isbn(isbns[isbn_num_update])
-                                new_book_update_isbn: Book = Book(old_book.title, old_book.author, old_book.year,
-                                                                  old_book.genre, old_book.isbn)
-                                new_book_update_isbn.title = titles[random.randint(0, len(titles) - 1)]
-                                new_book_update_isbn.genre = genres[random.randint(0, len(genres) - 1)]
-                                lib.update_book(old_book, new_book_update_isbn)
+                            isbn_num_update: int = random.randint(0, len(isbns) - 1)
+                            old_book: Book = lib.get_book_by_isbn(isbns[isbn_num_update])
+                            new_book_update_isbn: Book = Book(old_book.title, old_book.author, old_book.year,
+                                                              old_book.genre, old_book.isbn)
+                            new_book_update_isbn.title = titles[random.randint(0, len(titles) - 1)]
+                            new_book_update_isbn.genre = genres[random.randint(0, len(genres) - 1)]
+                            lib.update_book(old_book, new_book_update_isbn)
 
                     except ValueError:
                         print("Coosen book/books to update have already deleted")
@@ -241,5 +241,6 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> int:
                     print("fire!!!")
         print("end")
         return 0
-    except Exception:
+    except Exception as e:
+        print(e)
         return 1

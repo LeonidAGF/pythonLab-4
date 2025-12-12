@@ -2,6 +2,7 @@ from src.Book import Book
 from src.BookCollection import BookCollection
 from src.BookDictCollection import IsbnBookDictCollection, AuthorBookDictCollection, YearBookDictCollection
 
+
 class Library:
     """
     класс библеотеки с книгами, в которой можно искать, добавлять, удалять, обновлять книги по isbn, автрору, году
@@ -165,7 +166,7 @@ class Library:
             self.yearDict.remove(book.year, book)
             self.isbnDict.remove(book.isbn, book)
 
-    def add_book(self, book:Book) -> None:
+    def add_book(self, book: Book) -> None:
         """
             функция для добавления книги в библиотеку
             :return: ничего не возвращает
@@ -175,7 +176,7 @@ class Library:
         self.isbnDict[book.isbn] = book
         self.authorDict[book.author] = book
 
-    def update_book(self,old_book:Book,new_book:Book) -> None:
+    def update_book(self, old_book: Book, new_book: Book) -> None:
         """
             функция для обновления книги в библиотеке
             :return: ничего не возвращает

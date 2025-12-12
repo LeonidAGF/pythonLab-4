@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from src.Book import Book
 
 
@@ -31,7 +29,7 @@ class BookDictCollection:
         """
         return self.data[index]
 
-    def __setitem__(self, index, book:Book) -> None:
+    def __setitem__(self, index, book: Book) -> None:
         """
         дабавление нового элемента по ключу
         :return: Данная функция ничего не возвращает
@@ -52,7 +50,7 @@ class BookDictCollection:
         """
         return len(self.data)
 
-    def __contains__(self, book:Book) -> bool:
+    def __contains__(self, book: Book) -> bool:
         """
           функция проверяющая содержание элемента в коллекции
           :return: true если элемент содержится в коллекции и false иначе
@@ -67,6 +65,7 @@ class IsbnBookDictCollection(BookDictCollection):
     """
       коллекция сортирующая книги по isbn
     """
+
     def __contains__(self, isbn) -> bool:
         """
           функция проверяющая содержание isbn в коллекции
@@ -83,13 +82,6 @@ class AuthorBookDictCollection(BookDictCollection):
         Коллекция сортирующая книги по именам авторов
     """
 
-    def __init__(self):
-        """
-        конструктор
-        """
-        super().__init__()
-        self.data = defaultdict(list)
-
     def remove(self, author: str, el) -> None:
         """
         функция удаления элемента по некоторому ключу
@@ -97,17 +89,28 @@ class AuthorBookDictCollection(BookDictCollection):
         """
         if el in self.data[author]:
             self.data[author].remove(el)
-            if len(self.data[author])==0:
+            if len(self.data[author]) == 0:
                 del self.data[author]
 
-    def __setitem__(self, index:str, book:Book) -> None:
+    def __setitem__(self, index: str, book: Book) -> None:
         """
         дабавление нового элемента по ключу
         :return: Данная функция ничего не возвращает
         """
+        if index not in self.data:
+            self.data[index] = []
         self.data[index].append(book)
 
-    def __contains__(self, book:Book) -> bool:
+    def __getitem__(self, index):
+        """
+          функция получения элемента по некоторому ключу
+          :return: найденный элемент
+        """
+        if index not in self.data:
+            return []
+        return self.data[index]
+
+    def __contains__(self, book: Book) -> bool:
         """
             функция проверяющая содержание элемента в коллекции
             :return: true если элемент содержится в коллекции и false иначе
@@ -120,36 +123,38 @@ class AuthorBookDictCollection(BookDictCollection):
 
 class YearBookDictCollection(BookDictCollection):
     """
-      Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-      :return: Данная функция ничего не возвращает
+        Коллекция сортирующая книги по годам
     """
 
-    def __init__(self):
-        """
-        Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-        :return: Данная функция ничего не возвращает
-        """
-        super().__init__()
-        self.data = defaultdict(list)
-
-    def remove(self, year, book:Book) -> None:
+    def remove(self, year, book: Book) -> None:
         """
         функция удаления элемента по некоторому ключу
         :return: Данная функция ничего не возвращает
         """
         if book in self.data[year]:
             self.data[year].remove(book)
-            if len(self.data[year])==0:
+            if len(self.data[year]) == 0:
                 del self.data[year]
 
-    def __setitem__(self, index:int, book:Book) -> None:
+    def __setitem__(self, index: int, book: Book) -> None:
         """
         дабавление нового элемента по ключу
         :return: Данная функция ничего не возвращает
         """
+        if index not in self.data:
+            self.data[index] = []
         self.data[index].append(book)
 
-    def __contains__(self, book:Book) -> bool:
+    def __getitem__(self, index):
+        """
+          функция получения элемента по некоторому ключу
+          :return: найденный элемент
+        """
+        if index not in self.data:
+            return []
+        return self.data[index]
+
+    def __contains__(self, book: Book) -> bool:
         """
           функция проверяющая содержание элемента в коллекции
           :return: true если элемент содержится в коллекции и false иначе
